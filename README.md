@@ -13,3 +13,6 @@ Tools included:
 * SBT
 * git
 * Java 8
+
+
+docker run -it --name devtest -v ~/dev/bdec/test-data/allen-p/test:/opt/octo paulb79/octo-jdk-scala-python3:latest /bin/bash

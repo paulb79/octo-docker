@@ -1,0 +1,4 @@
+gensim
+pyagg
+PIL
+pylab

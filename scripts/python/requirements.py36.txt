@@ -1,0 +1,13 @@
+arrow
+editdistance
+matplotlib
+nltk
+numpy
+pandas
+pyexcel_xlsx
+PyPDF2
+pytesseract
+seaborn
+scikit-learn
+spacy
+tensorflow
