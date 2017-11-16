@@ -1,10 +1,9 @@
 arrow
-editdistance
 matplotlib
 nltk
 numpy
 pandas
-pyexcel_xlsx
+pyexcel-xlsx
 PyPDF2
 pytesseract
 seaborn
