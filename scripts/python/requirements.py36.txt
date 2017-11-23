@@ -6,6 +6,7 @@ pandas
 pyexcel-xlsx
 PyPDF2
 pytesseract
+python-magic
 seaborn
 scikit-learn
 spacy
