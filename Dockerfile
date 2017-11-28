@@ -18,7 +18,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN \
     apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
-    git mercurial subversion software-properties-common
+    git mercurial subversion software-properties-common unzip
 
 RUN apt-get install default-jdk -y
 
@@ -41,14 +41,12 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
 
-# install geturl script to retrieve the most current download URL of CoreNLP
-WORKDIR /opt/
-RUN git clone https://github.com/foutaise/grepurl.git
+RUN wget --quiet https://nlp.stanford.edu/software/stanford-ner-2017-06-09.zip && \
+    unzip stanford-ner-2017-06-09.zip && \
+    mv stanford-ner-2017-06-09 lib/stanford-ner && rm stanford-ner-2017-06-09.zip
 
-# install latest CoreNLP release
-RUN wget $(/opt/grepurl/grepurl -d -r 'zip$' -a http://stanfordnlp.github.io/CoreNLP/) && \
-    unzip stanford-corenlp-full-*.zip && \
-    mv $(ls -d stanford-corenlp-full-*/) lib/corenlp && rm *.zip
+RUN wget --quiet http://nlp.stanford.edu/software/stanford-english-corenlp-2017-06-09-models.jar && \
+    mv stanford-english-corenlp-2017-06-09-models.jar lib/stanford-en-models
 
 ENV PATH /opt/conda/bin:$PATH
 
