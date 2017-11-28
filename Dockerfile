@@ -41,6 +41,15 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
 
+# install geturl script to retrieve the most current download URL of CoreNLP
+WORKDIR /opt/
+RUN git clone https://github.com/foutaise/grepurl.git
+
+# install latest CoreNLP release
+RUN wget $(/opt/grepurl/grepurl -d -r 'zip$' -a http://stanfordnlp.github.io/CoreNLP/) && \
+    unzip stanford-corenlp-full-*.zip && \
+    mv $(ls -d stanford-corenlp-full-*/) lib/corenlp && rm *.zip
+
 ENV PATH /opt/conda/bin:$PATH
 
 COPY ./scripts/python /opt/setup
